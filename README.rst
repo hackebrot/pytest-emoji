@@ -48,6 +48,13 @@ Features
 This plugin adds a ``--emoji`` CLI flag to pytest, which replaces the test
 result indicator to emojis, both for *normal* and *verbose* mode.
 
+- 😃 / PASSED 😃 for passed tests
+- 😰 / FAILED 😰 for failed tests
+- 😞 / xfail 😞 for xfailed tests
+- 😲 / XPASS 😲 for xpassed tests
+- 🙄 / SKIPPED 🙄 for skipped tests
+- 😡 / ERROR 😡 for tests with errors
+
 Normal mode:
 
 ``$ pytest --emoji``
