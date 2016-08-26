@@ -14,6 +14,8 @@ pytest + emoji == 😍
 Do you find writing tests tedious or boring? It can be - but it doesn't need to
 be.
 
+---
+
 ``pytest`` is a mature testing framework for Python that is developed by a
 thriving and ever-growing community of volunteers. It uses plain assert
 statements and regular Python comparisons. Writing tests with pytest requires
@@ -35,7 +37,7 @@ Installation
 
 **pytest-emoji** is available for Python 3. 🐍
 
-You can install "pytest-emoji" via `pip`_ from `PyPI`_::
+You can install **pytest-emoji** via `pip`_ from `PyPI`_::
 
     $ pip install pytest-emoji
 
@@ -48,33 +50,41 @@ Features
 This plugin adds a ``--emoji`` CLI flag to pytest, which replaces the test
 result indicator to emojis, both for *normal* and *verbose* mode.
 
-- 😃 / PASSED 😃 for passed tests
-- 😰 / FAILED 😰 for failed tests
-- 😞 / xfail 😞 for xfailed tests
-- 😲 / XPASS 😲 for xpassed tests
-- 🙄 / SKIPPED 🙄 for skipped tests
-- 😡 / ERROR 😡 for tests with errors
+- ``😃 / PASSED 😃`` for passed tests
+- ``😰 / FAILED 😰`` for failed tests
+- ``😞 / xfail 😞`` for xfailed tests
+- ``😲 / XPASS 😲`` for xpassed tests
+- ``🙄 / SKIPPED 🙄`` for skipped tests
+- ``😡 / ERROR 😡`` for tests with errors
 
 Normal mode:
 
-``$ pytest --emoji``
+.. code-block:: text
+    
+    $ pytest --emoji
 
-```
-tests/test_emoji.py 😃 😰 😞 😲 🙄 😡
-```
+
+.. code-block:: text
+
+    tests/test_emoji.py 😃 😰 😞 😲 🙄 😡
+
 
 Verbose mode:
 
-``$ pytest --verbose --emoji``
+.. code-block:: text
 
-```
-tests/test_emoji.py::test_passed PASSED 😃
-tests/test_emoji.py::test_failed FAILED 😰
-tests/test_emoji.py::test_xfailed xfail 😞
-tests/test_emoji.py::test_xpassed XPASS 😲
-tests/test_emoji.py::test_skipped SKIPPED 🙄
-tests/test_emoji.py::test_error ERROR 😡
-```
+    $ pytest --verbose --emoji
+
+
+.. code-block:: text
+
+    tests/test_emoji.py::test_passed PASSED 😃
+    tests/test_emoji.py::test_failed FAILED 😰
+    tests/test_emoji.py::test_xfailed xfail 😞
+    tests/test_emoji.py::test_xpassed XPASS 😲
+    tests/test_emoji.py::test_skipped SKIPPED 🙄
+    tests/test_emoji.py::test_error ERROR 😡
+
 
 Customization
 -------------
@@ -84,31 +94,33 @@ You can change also the emojis, if you want. 😛
 Add a ``conftest.py`` to your tests folder and implement the following hooks.
 If you wish to use the default, omit the according hook.
 
-```python
-def pytest_emoji_passed(config):
-    # COFFEEE!!!
-    return u'☕ ', u'PASSED ☕ '
+
+.. code-block:: python
+
+    def pytest_emoji_passed(config):
+        # COFFEEE!!!
+        return u'☕ ', u'PASSED ☕ '
 
 
-def pytest_emoji_failed(config):
-    return u'😿 ', u'FAILED 😿 '
+    def pytest_emoji_failed(config):
+        return u'😿 ', u'FAILED 😿 '
 
 
-def pytest_emoji_skipped(config):
-    return u'🙈 ', u'SKIPPED 🙈 '
+    def pytest_emoji_skipped(config):
+        return u'🙈 ', u'SKIPPED 🙈 '
 
 
-def pytest_emoji_error(config):
-    return u'💩 ', u'ERROR 💩 '
+    def pytest_emoji_error(config):
+        return u'💩 ', u'ERROR 💩 '
 
 
-def pytest_emoji_xfailed(config):
-    return u'🤓 ', u'xfail 🤓 '
+    def pytest_emoji_xfailed(config):
+        return u'🤓 ', u'xfail 🤓 '
 
 
-def pytest_emoji_xpassed(config):
-    return u'😜 ', u'XPASS 😜 '
-```
+    def pytest_emoji_xpassed(config):
+        return u'😜 ', u'XPASS 😜 '
+
 
 Naming is important, make sure you don't make any typos!
 
