@@ -14,7 +14,8 @@ pytest + emoji == 😍
 Do you find writing tests tedious or boring? It can be - but it doesn't need to
 be.
 
----
+pytest
+------
 
 ``pytest`` is a mature testing framework for Python that is developed by a
 thriving and ever-growing community of volunteers. It uses plain assert
@@ -98,8 +99,7 @@ If you wish to use the default, omit the according hook.
 .. code-block:: python
 
     def pytest_emoji_passed(config):
-        # COFFEEE!!!
-        return u'☕ ', u'PASSED ☕ '
+        return u'🍪 ', u'PASSED 🍪 '
 
 
     def pytest_emoji_failed(config):
@@ -126,7 +126,7 @@ Naming is important, make sure you don't make any typos!
 
 All of these hooks receive the pytest ``config`` object, which allows you to
 check options and further customize the output. All hooks need to return a
-tuple of ``str`` and it's recommended for emoji to add an extra `` `` (blank).
+tuple of ``str`` and it's recommended for emoji to add an extra ``' '`` (blank).
 
 
 Contributing
