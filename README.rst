@@ -104,7 +104,7 @@ Verbose mode:
 Customization
 -------------
 
-You can change also the emojis, if you want. 😛
+You can also change the emojis, if you want. 😛
 
 Add a ``conftest.py`` to your tests folder and implement the following hooks.
 If you wish to use the default, omit the according hook.
