@@ -1,0 +1,10 @@
+site_name: pytest-emoji
+site_description: pytest + emoji
+site_author: Raphael Pierzina
+
+theme: readthedocs
+
+repo_url: https://github.com/hackebrot/pytest-emoji
+
+pages:
+- Home: index.md
