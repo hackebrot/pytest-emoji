@@ -126,7 +126,9 @@ Naming is important, make sure you don't make any typos!
 
 All of these hooks receive the pytest ``config`` object, which allows you to
 check options and further customize the output. All hooks need to return a
-tuple of ``str`` and it's recommended for emoji to add an extra ``' '`` (blank).
+tuple of ``str`` as in ``('<shortletter>', '<verbose-word>')``.
+
+It's recommended for emoji to add an extra ``' '`` (blank) for better formatting.
 
 
 Contributing
