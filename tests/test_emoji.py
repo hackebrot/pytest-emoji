@@ -26,6 +26,9 @@ def emoji_tests():
         def test_xpassed():
             assert True
 
+        def test_new_pytest_is_awesome():
+            assert True
+
         @pytest.mark.skipif(True, reason='nope')
         def test_skipped():
             assert True
@@ -37,6 +40,7 @@ def emoji_tests():
         @pytest.mark.raph
         def test_error(lol):
             assert True
+
         """)
 
 
@@ -84,6 +88,7 @@ def test_emoji_disabled_by_default_verbose(testdir, emoji_tests):
         '*::test_failed FAILED',
         '*::test_xfailed xfail',
         '*::test_xpassed XPASS',
+        '*::test_new_pytest_is_awesome PASSED',
         '*::test_skipped SKIPPED',
         '*::test_error ERROR',
     ])
@@ -109,6 +114,7 @@ def test_emoji_enabled_verbose(testdir, emoji_tests):
         '*::test_failed FAILED 😰 ',
         '*::test_xfailed xfail 😞 ',
         '*::test_xpassed XPASS 😲 ',
+        '*::test_new_pytest_is_awesome PASSED 😃 ',
         '*::test_skipped SKIPPED 🙄 ',
         '*::test_error ERROR 😡 ',
     ])
@@ -136,6 +142,7 @@ def test_emoji_enabled_custom_verbose(testdir, emoji_tests, custom_emojis):
         '*::test_failed FAILED 😿 ',
         '*::test_xfailed xfail 🤓 ',
         '*::test_xpassed XPASS 😜 ',
+        '*::test_new_pytest_is_awesome PASSED 🍪 ',
         '*::test_skipped SKIPPED 🙈 ',
         '*::test_error ERROR 💩 ',
     ])
@@ -154,7 +161,7 @@ def test_emoji_disabled_by_default_non_verbose(testdir, emoji_tests):
 
     # fnmatch_lines does an assertion internally
     result.stdout.fnmatch_lines([
-        '* .FxXsE',
+        '* .FxX.sE',
     ])
 
     # make sure that that we get a '1' exit code
@@ -173,7 +180,7 @@ def test_emoji_enabled_non_verbose(testdir, emoji_tests):
 
     # fnmatch_lines does an assertion internally
     result.stdout.fnmatch_lines([
-        '* 😃 😰 😞 😲 🙄 😡 ',
+        '* 😃 😰 😞 😲 😃 🙄 😡 ',
     ])
 
     # make sure that that we get a '1' exit code
@@ -194,7 +201,7 @@ def test_emoji_enabled_custom_non_verbose(testdir, emoji_tests, custom_emojis):
 
     # fnmatch_lines does an assertion internally
     result.stdout.fnmatch_lines([
-        '* 🍪 😿 🤓 😜 🙈 💩 ',
+        '* 🍪 😿 🤓 😜 🍪 🙈 💩 ',
     ])
 
     # make sure that that we get a '1' exit code
