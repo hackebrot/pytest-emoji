@@ -1,23 +1,37 @@
 pytest-emoji
 ===================================
 
-.. image:: https://travis-ci.org/hackebrot/pytest-emoji.svg?branch=master
-    :target: https://travis-ci.org/hackebrot/pytest-emoji
-    :alt: See Build Status on Travis CI
-
-.. image:: https://ci.appveyor.com/api/projects/status/github/hackebrot/pytest-emoji?branch=master
-    :target: https://ci.appveyor.com/project/hackebrot/pytest-emoji/branch/master
-    :alt: See Build Status on AppVeyor
+|pypi| |pyversions| |license| |travis-ci| |appveyor|
 
 pytest + emoji == 😍
 
 Do you find writing tests tedious or boring? It can be - but it doesn't need to
 be.
 
+.. |pypi| image:: https://img.shields.io/pypi/v/pytest-emoji.svg
+   :target: https://pypi.python.org/pypi/pytest-emoji
+   :alt: PyPI Package
+
+.. |pyversions| image:: https://img.shields.io/pypi/pyversions/pytest-emoji.svg
+   :target: https://pypi.python.org/pypi/pytest-emoji/
+   :alt: PyPI Python Versions
+
+.. |license| image:: https://img.shields.io/pypi/l/pytest-emoji.svg
+   :target: https://pypi.python.org/pypi/pytest-emoji
+   :alt: PyPI Package License
+
+.. |travis-ci| image:: https://travis-ci.org/hackebrot/pytest-emoji.svg?branch=master
+    :target: https://travis-ci.org/hackebrot/pytest-emoji
+    :alt: See Build Status on Travis CI
+
+.. |appveyor| image:: https://ci.appveyor.com/api/projects/status/github/hackebrot/pytest-emoji?branch=master
+    :target: https://ci.appveyor.com/project/hackebrot/pytest-emoji/branch/master
+    :alt: See Build Status on AppVeyor
+
 pytest
 ------
 
-``pytest`` is a mature testing framework for Python that is developed by a
+**pytest** is a mature testing framework for Python that is developed by a
 thriving and ever-growing community of volunteers. It uses plain assert
 statements and regular Python comparisons. Writing tests with pytest requires
 little to no boilerplate code and powerful features allow easy parametrization
