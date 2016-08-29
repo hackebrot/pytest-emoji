@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import io
 import os
 
 from setuptools import setup
@@ -9,7 +10,7 @@ from setuptools import setup
 def read(fname):
     file_path = os.path.join(os.path.dirname(__file__), fname)
 
-    with open(file_path, encoding='utf-8') as f:
+    with io.open(file_path, encoding='utf-8') as f:
         contents = f.read()
 
     return contents
