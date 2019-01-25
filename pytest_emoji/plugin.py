@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import pytest
-
 from pytest_emoji import hooks
 
 
@@ -40,35 +38,40 @@ def pytest_emoji_xpassed(config):
     return u'😲 ', u'XPASS 😲 '
 
 
+def pytest_configure(config):
+    global _config
+    _config = config
+
+
 def pytest_report_teststatus(report):
-    if pytest.config.option.emoji is False:
+    if _config.option.emoji is False:
         # Do not modify reporting unless pytest
         # is called with --emoji
         return
 
-    error_hook = pytest.config.hook.pytest_emoji_error
-    failed_hook = pytest.config.hook.pytest_emoji_failed
-    passed_hook = pytest.config.hook.pytest_emoji_passed
-    skipped_hook = pytest.config.hook.pytest_emoji_skipped
-    xfailed_hook = pytest.config.hook.pytest_emoji_xfailed
-    xpassed_hook = pytest.config.hook.pytest_emoji_xpassed
+    error_hook = _config.hook.pytest_emoji_error
+    failed_hook = _config.hook.pytest_emoji_failed
+    passed_hook = _config.hook.pytest_emoji_passed
+    skipped_hook = _config.hook.pytest_emoji_skipped
+    xfailed_hook = _config.hook.pytest_emoji_xfailed
+    xpassed_hook = _config.hook.pytest_emoji_xpassed
 
     # Handle error and skipped in setup and teardown phase
     if report.when in ('setup', 'teardown'):
         if report.failed:
-            short, verbose = error_hook(config=pytest.config)
+            short, verbose = error_hook(config=_config)
             return 'error', short, verbose
         elif report.skipped:
-            short, verbose = skipped_hook(config=pytest.config)
+            short, verbose = skipped_hook(config=_config)
             return 'skipped', short, verbose
 
     # Handle xfailed and xpassed
     if hasattr(report, 'wasxfail'):
         if report.skipped:
-            short, verbose = xfailed_hook(config=pytest.config)
+            short, verbose = xfailed_hook(config=_config)
             return 'xfailed', short, verbose
         elif report.passed:
-            short, verbose = xpassed_hook(config=pytest.config)
+            short, verbose = xpassed_hook(config=_config)
             return 'xpassed', short, verbose
         else:
             return '', '', ''
@@ -76,11 +79,11 @@ def pytest_report_teststatus(report):
     # Handle passed, skipped and failed in call phase
     if report.when == 'call':
         if report.passed:
-            short, verbose = passed_hook(config=pytest.config)
+            short, verbose = passed_hook(config=_config)
         elif report.skipped:
-            short, verbose = skipped_hook(config=pytest.config)
+            short, verbose = skipped_hook(config=_config)
         elif report.failed:
-            short, verbose = failed_hook(config=pytest.config)
+            short, verbose = failed_hook(config=_config)
         return report.outcome, short, verbose
 
 
