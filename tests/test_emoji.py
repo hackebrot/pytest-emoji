@@ -80,6 +80,7 @@ def test_emoji_disabled_by_default_verbose(testdir, emoji_tests):
     # run pytest with the following cmd args
     result = testdir.runpytest(
         '-v',
+        '-o', 'console_output_style=classic'
     )
 
     # fnmatch_lines does an assertion internally
@@ -106,6 +107,7 @@ def test_emoji_enabled_verbose(testdir, emoji_tests):
     result = testdir.runpytest(
         '-v',
         '--emoji',
+        '-o', 'console_output_style=classic'
     )
 
     # fnmatch_lines does an assertion internally
@@ -134,6 +136,7 @@ def test_emoji_enabled_custom_verbose(testdir, emoji_tests, custom_emojis):
     result = testdir.runpytest(
         '-v',
         '--emoji',
+        '-o', 'console_output_style=classic'
     )
 
     # fnmatch_lines does an assertion internally
@@ -157,7 +160,9 @@ def test_emoji_disabled_by_default_non_verbose(testdir, emoji_tests):
     testdir.makepyfile(emoji_tests)
 
     # run pytest with the following cmd args
-    result = testdir.runpytest()
+    result = testdir.runpytest(
+        '-o', 'console_output_style=classic'
+    )
 
     # fnmatch_lines does an assertion internally
     result.stdout.fnmatch_lines([
@@ -176,6 +181,7 @@ def test_emoji_enabled_non_verbose(testdir, emoji_tests):
     # run pytest with the following cmd args
     result = testdir.runpytest(
         '--emoji',
+        '-o', 'console_output_style=classic'
     )
 
     # fnmatch_lines does an assertion internally
@@ -197,6 +203,7 @@ def test_emoji_enabled_custom_non_verbose(testdir, emoji_tests, custom_emojis):
     # run pytest with the following cmd args
     result = testdir.runpytest(
         '--emoji',
+        '-o', 'console_output_style=classic'
     )
 
     # fnmatch_lines does an assertion internally
