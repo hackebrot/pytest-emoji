@@ -3,7 +3,7 @@
 
 import os
 
-from setuptools import setup
+from setuptools import setup, find_packages
 
 
 def read(fname):
@@ -26,10 +26,8 @@ setup(
     url='https://github.com/hackebrot/pytest-emoji',
     description='pytest + emoji',
     long_description=read('README.rst'),
-    packages=[
-        'pytest_emoji',
-    ],
-    package_dir={'pytest_emoji': 'pytest_emoji'},
+    packages=find_packages("src"),
+    package_dir={"": "src"},
     include_package_data=True,
     install_requires=['pytest>=3.0.1'],
     classifiers=[
