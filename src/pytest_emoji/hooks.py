@@ -44,7 +44,7 @@ def pytest_emoji_xfailed(config):
     """Called to get a representation for a xfailed test item.
 
     Requires a tuple of (<shortletter>, <verbose-word>)
-    pytest defaults to ('x', 'xfail')
+    pytest defaults to ('x', 'XFAIL')
     """
 
 

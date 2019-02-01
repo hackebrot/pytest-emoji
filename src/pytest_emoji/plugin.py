@@ -25,7 +25,7 @@ def pytest_emoji_error(config):
 
 def pytest_emoji_xfailed(config):
     # DISAPPOINTED FACE
-    return u"😞 ", u"xfail 😞 "
+    return u"😞 ", u"XFAIL 😞 "
 
 
 def pytest_emoji_xpassed(config):
@@ -38,56 +38,40 @@ def pytest_addhooks(pluginmanager):
     pluginmanager.add_hookspecs(hooks)
 
 
-def pytest_configure(config):
+def pytest_report_teststatus(report, config):
     if config.option.emoji is False:
-        # Do not enable the EmojiPlugin and modify reporting,
-        # unless pytest is called with --emoji
+        # Do not modify reporting, unless pytest is called with --emoji
         return
 
-    config.pluginmanager.register(EmojiPlugin(config), "_emoji")
+    # Handle error and skipped in setup and teardown phase
+    if report.when in ("setup", "teardown"):
+        if report.failed:
+            short, verbose = config.hook.pytest_emoji_error(config=config)
+            return "error", short, verbose
+        elif report.skipped:
+            short, verbose = config.hook.pytest_emoji_skipped(config=config)
+            return "skipped", short, verbose
 
+    # Handle xfailed and xpassed
+    if hasattr(report, "wasxfail"):
+        if report.skipped:
+            short, verbose = config.hook.pytest_emoji_xfailed(config=config)
+            return "xfailed", short, verbose
+        elif report.passed:
+            short, verbose = config.hook.pytest_emoji_xpassed(config=config)
+            return "xpassed", short, verbose
+        else:
+            return "", "", ""
 
-class EmojiPlugin(object):
-    def __init__(self, config):
-        self.config = config
-
-    def pytest_report_teststatus(self, report):
-        error_hook = self.config.hook.pytest_emoji_error
-        failed_hook = self.config.hook.pytest_emoji_failed
-        passed_hook = self.config.hook.pytest_emoji_passed
-        skipped_hook = self.config.hook.pytest_emoji_skipped
-        xfailed_hook = self.config.hook.pytest_emoji_xfailed
-        xpassed_hook = self.config.hook.pytest_emoji_xpassed
-
-        # Handle error and skipped in setup and teardown phase
-        if report.when in ("setup", "teardown"):
-            if report.failed:
-                short, verbose = error_hook(config=self.config)
-                return "error", short, verbose
-            elif report.skipped:
-                short, verbose = skipped_hook(config=self.config)
-                return "skipped", short, verbose
-
-        # Handle xfailed and xpassed
-        if hasattr(report, "wasxfail"):
-            if report.skipped:
-                short, verbose = xfailed_hook(config=self.config)
-                return "xfailed", short, verbose
-            elif report.passed:
-                short, verbose = xpassed_hook(config=self.config)
-                return "xpassed", short, verbose
-            else:
-                return "", "", ""
-
-        # Handle passed, skipped and failed in call phase
-        if report.when == "call":
-            if report.passed:
-                short, verbose = passed_hook(config=self.config)
-            elif report.skipped:
-                short, verbose = skipped_hook(config=self.config)
-            elif report.failed:
-                short, verbose = failed_hook(config=self.config)
-            return report.outcome, short, verbose
+    # Handle passed, skipped and failed in call phase
+    if report.when == "call":
+        if report.passed:
+            short, verbose = config.hook.pytest_emoji_passed(config=config)
+        elif report.skipped:
+            short, verbose = config.hook.pytest_emoji_skipped(config=config)
+        elif report.failed:
+            short, verbose = config.hook.pytest_emoji_failed(config=config)
+        return report.outcome, short, verbose
 
 
 def pytest_addoption(parser):

@@ -67,7 +67,7 @@ result indicator to emojis, both for *normal* and *verbose* mode.
 
 - ``😃 / PASSED 😃`` for passed tests
 - ``😰 / FAILED 😰`` for failed tests
-- ``😞 / xfail 😞`` for xfailed tests
+- ``😞 / XFAIL 😞`` for xfailed tests
 - ``😲 / XPASS 😲`` for xpassed tests
 - ``🙄 / SKIPPED 🙄`` for skipped tests
 - ``😡 / ERROR 😡`` for tests with errors
@@ -95,7 +95,7 @@ Verbose mode:
 
     tests/test_emoji.py::test_passed PASSED 😃
     tests/test_emoji.py::test_failed FAILED 😰
-    tests/test_emoji.py::test_xfailed xfail 😞
+    tests/test_emoji.py::test_xfailed XFAIL 😞
     tests/test_emoji.py::test_xpassed XPASS 😲
     tests/test_emoji.py::test_skipped SKIPPED 🙄
     tests/test_emoji.py::test_error ERROR 😡
@@ -129,7 +129,7 @@ If you wish to use the default, omit the according hook.
 
 
     def pytest_emoji_xfailed(config):
-        return u'🤓 ', u'xfail 🤓 '
+        return u'🤓 ', u'XFAIL 🤓 '
 
 
     def pytest_emoji_xpassed(config):

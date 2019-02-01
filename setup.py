@@ -29,7 +29,7 @@ setup(
     packages=find_packages("src"),
     package_dir={"": "src"},
     include_package_data=True,
-    install_requires=['pytest>=3.0.1'],
+    install_requires=['pytest>=4.2.0'],
     classifiers=[
         'Development Status :: 4 - Beta',
         'Framework :: Pytest',

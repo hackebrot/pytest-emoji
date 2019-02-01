@@ -64,7 +64,7 @@ def custom_emojis():
 
 
         def pytest_emoji_xfailed(config):
-            return u'🤓 ', u'xfail 🤓 '
+            return u'🤓 ', u'XFAIL 🤓 '
 
 
         def pytest_emoji_xpassed(config):
@@ -87,7 +87,7 @@ def test_emoji_disabled_by_default_verbose(testdir, emoji_tests):
     result.stdout.fnmatch_lines([
         '*::test_passed PASSED',
         '*::test_failed FAILED',
-        '*::test_xfailed xfail',
+        '*::test_xfailed XFAIL',
         '*::test_xpassed XPASS',
         '*::test_new_pytest_is_awesome PASSED',
         '*::test_skipped SKIPPED',
@@ -114,7 +114,7 @@ def test_emoji_enabled_verbose(testdir, emoji_tests):
     result.stdout.fnmatch_lines([
         '*::test_passed PASSED 😃 ',
         '*::test_failed FAILED 😰 ',
-        '*::test_xfailed xfail 😞 ',
+        '*::test_xfailed XFAIL 😞 ',
         '*::test_xpassed XPASS 😲 ',
         '*::test_new_pytest_is_awesome PASSED 😃 ',
         '*::test_skipped SKIPPED 🙄 ',
@@ -143,7 +143,7 @@ def test_emoji_enabled_custom_verbose(testdir, emoji_tests, custom_emojis):
     result.stdout.fnmatch_lines([
         '*::test_passed PASSED 🍪 ',
         '*::test_failed FAILED 😿 ',
-        '*::test_xfailed xfail 🤓 ',
+        '*::test_xfailed XFAIL 🤓 ',
         '*::test_xpassed XPASS 😜 ',
         '*::test_new_pytest_is_awesome PASSED 🍪 ',
         '*::test_skipped SKIPPED 🙈 ',
