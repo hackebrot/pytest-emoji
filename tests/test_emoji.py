@@ -7,7 +7,8 @@ import pytest
 
 @pytest.fixture
 def emoji_tests():
-    return textwrap.dedent("""
+    return textwrap.dedent(
+        """
         # -*- coding: utf-8 -*-
 
         import pytest
@@ -41,12 +42,14 @@ def emoji_tests():
         def test_error(lol):
             assert True
 
-        """)
+        """
+    )
 
 
 @pytest.fixture
 def custom_emojis():
-    return textwrap.dedent("""
+    return textwrap.dedent(
+        """
         def pytest_emoji_passed(config):
             return u'🍪 ', u'PASSED 🍪 '
 
@@ -70,7 +73,8 @@ def custom_emojis():
         def pytest_emoji_xpassed(config):
             return u'😜 ', u'XPASS 😜 '
 
-        """)
+        """
+    )
 
 
 def test_emoji_disabled_by_default_verbose(testdir, emoji_tests):
@@ -78,21 +82,20 @@ def test_emoji_disabled_by_default_verbose(testdir, emoji_tests):
     testdir.makepyfile(emoji_tests)
 
     # run pytest with the following cmd args
-    result = testdir.runpytest(
-        '-v',
-        '-o', 'console_output_style=classic'
-    )
+    result = testdir.runpytest("-v", "-o", "console_output_style=classic")
 
     # fnmatch_lines does an assertion internally
-    result.stdout.fnmatch_lines([
-        '*::test_passed PASSED',
-        '*::test_failed FAILED',
-        '*::test_xfailed XFAIL',
-        '*::test_xpassed XPASS',
-        '*::test_new_pytest_is_awesome PASSED',
-        '*::test_skipped SKIPPED',
-        '*::test_error ERROR',
-    ])
+    result.stdout.fnmatch_lines(
+        [
+            "*::test_passed PASSED",
+            "*::test_failed FAILED",
+            "*::test_xfailed XFAIL",
+            "*::test_xpassed XPASS",
+            "*::test_new_pytest_is_awesome PASSED",
+            "*::test_skipped SKIPPED",
+            "*::test_error ERROR",
+        ]
+    )
 
     # make sure that that we get a '1' exit code
     # as we have at least one failure
@@ -104,22 +107,20 @@ def test_emoji_enabled_verbose(testdir, emoji_tests):
     testdir.makepyfile(emoji_tests)
 
     # run pytest with the following cmd args
-    result = testdir.runpytest(
-        '-v',
-        '--emoji',
-        '-o', 'console_output_style=classic'
-    )
+    result = testdir.runpytest("-v", "--emoji", "-o", "console_output_style=classic")
 
     # fnmatch_lines does an assertion internally
-    result.stdout.fnmatch_lines([
-        '*::test_passed PASSED 😃 ',
-        '*::test_failed FAILED 😰 ',
-        '*::test_xfailed XFAIL 😞 ',
-        '*::test_xpassed XPASS 😲 ',
-        '*::test_new_pytest_is_awesome PASSED 😃 ',
-        '*::test_skipped SKIPPED 🙄 ',
-        '*::test_error ERROR 😡 ',
-    ])
+    result.stdout.fnmatch_lines(
+        [
+            "*::test_passed PASSED 😃 ",
+            "*::test_failed FAILED 😰 ",
+            "*::test_xfailed XFAIL 😞 ",
+            "*::test_xpassed XPASS 😲 ",
+            "*::test_new_pytest_is_awesome PASSED 😃 ",
+            "*::test_skipped SKIPPED 🙄 ",
+            "*::test_error ERROR 😡 ",
+        ]
+    )
 
     # make sure that that we get a '1' exit code
     # as we have at least one failure
@@ -133,22 +134,20 @@ def test_emoji_enabled_custom_verbose(testdir, emoji_tests, custom_emojis):
     testdir.makepyfile(emoji_tests)
 
     # run pytest with the following cmd args
-    result = testdir.runpytest(
-        '-v',
-        '--emoji',
-        '-o', 'console_output_style=classic'
-    )
+    result = testdir.runpytest("-v", "--emoji", "-o", "console_output_style=classic")
 
     # fnmatch_lines does an assertion internally
-    result.stdout.fnmatch_lines([
-        '*::test_passed PASSED 🍪 ',
-        '*::test_failed FAILED 😿 ',
-        '*::test_xfailed XFAIL 🤓 ',
-        '*::test_xpassed XPASS 😜 ',
-        '*::test_new_pytest_is_awesome PASSED 🍪 ',
-        '*::test_skipped SKIPPED 🙈 ',
-        '*::test_error ERROR 💩 ',
-    ])
+    result.stdout.fnmatch_lines(
+        [
+            "*::test_passed PASSED 🍪 ",
+            "*::test_failed FAILED 😿 ",
+            "*::test_xfailed XFAIL 🤓 ",
+            "*::test_xpassed XPASS 😜 ",
+            "*::test_new_pytest_is_awesome PASSED 🍪 ",
+            "*::test_skipped SKIPPED 🙈 ",
+            "*::test_error ERROR 💩 ",
+        ]
+    )
 
     # make sure that that we get a '1' exit code
     # as we have at least one failure
@@ -160,14 +159,10 @@ def test_emoji_disabled_by_default_non_verbose(testdir, emoji_tests):
     testdir.makepyfile(emoji_tests)
 
     # run pytest with the following cmd args
-    result = testdir.runpytest(
-        '-o', 'console_output_style=classic'
-    )
+    result = testdir.runpytest("-o", "console_output_style=classic")
 
     # fnmatch_lines does an assertion internally
-    result.stdout.fnmatch_lines([
-        '* .FxX.sE',
-    ])
+    result.stdout.fnmatch_lines(["* .FxX.sE"])
 
     # make sure that that we get a '1' exit code
     # as we have at least one failure
@@ -179,15 +174,10 @@ def test_emoji_enabled_non_verbose(testdir, emoji_tests):
     testdir.makepyfile(emoji_tests)
 
     # run pytest with the following cmd args
-    result = testdir.runpytest(
-        '--emoji',
-        '-o', 'console_output_style=classic'
-    )
+    result = testdir.runpytest("--emoji", "-o", "console_output_style=classic")
 
     # fnmatch_lines does an assertion internally
-    result.stdout.fnmatch_lines([
-        '* 😃 😰 😞 😲 😃 🙄 😡 ',
-    ])
+    result.stdout.fnmatch_lines(["* 😃 😰 😞 😲 😃 🙄 😡 "])
 
     # make sure that that we get a '1' exit code
     # as we have at least one failure
@@ -201,15 +191,10 @@ def test_emoji_enabled_custom_non_verbose(testdir, emoji_tests, custom_emojis):
     testdir.makepyfile(emoji_tests)
 
     # run pytest with the following cmd args
-    result = testdir.runpytest(
-        '--emoji',
-        '-o', 'console_output_style=classic'
-    )
+    result = testdir.runpytest("--emoji", "-o", "console_output_style=classic")
 
     # fnmatch_lines does an assertion internally
-    result.stdout.fnmatch_lines([
-        '* 🍪 😿 🤓 😜 🍪 🙈 💩 ',
-    ])
+    result.stdout.fnmatch_lines(["* 🍪 😿 🤓 😜 🍪 🙈 💩 "])
 
     # make sure that that we get a '1' exit code
     # as we have at least one failure
