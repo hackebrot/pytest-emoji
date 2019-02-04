@@ -9,6 +9,12 @@ environment:
     - PYTHON: "C:\\Python35"
       TOX_ENV: "py35"
 
+    - PYTHON: "C:\\Python36"
+      TOX_ENV: "py36"
+
+    - PYTHON: "C:\\Python37"
+      TOX_ENV: "py37"
+
 
 init:
   - "%PYTHON%/python -V"
@@ -19,17 +25,7 @@ install:
   - "%PYTHON%/Scripts/pip install tox"
   - "%PYTHON%/Scripts/pip install wheel"
 
-build: false  # Not a C# project, build stuff at the test step instead.
+build: false
 
 test_script:
   - "%PYTHON%/Scripts/tox -e %TOX_ENV%"
-
-after_test:
-  - "%PYTHON%/python setup.py bdist_wheel"
-  - ps: "ls dist"
-
-artifacts:
-  - path: dist\*
-
-#on_success:
-#  - TODO: upload the content of dist/*.whl to a public wheelhouse
