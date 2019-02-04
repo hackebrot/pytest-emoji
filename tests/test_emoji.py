@@ -107,7 +107,9 @@ def test_emoji_enabled_verbose(testdir, emoji_tests):
     testdir.makepyfile(emoji_tests)
 
     # run pytest with the following cmd args
-    result = testdir.runpytest("-v", "--emoji", "-o", "console_output_style=classic")
+    result = testdir.runpytest(
+        "-v", "--emoji", "-o", "console_output_style=classic"
+    )
 
     # fnmatch_lines does an assertion internally
     result.stdout.fnmatch_lines(
@@ -134,7 +136,9 @@ def test_emoji_enabled_custom_verbose(testdir, emoji_tests, custom_emojis):
     testdir.makepyfile(emoji_tests)
 
     # run pytest with the following cmd args
-    result = testdir.runpytest("-v", "--emoji", "-o", "console_output_style=classic")
+    result = testdir.runpytest(
+        "-v", "--emoji", "-o", "console_output_style=classic"
+    )
 
     # fnmatch_lines does an assertion internally
     result.stdout.fnmatch_lines(
