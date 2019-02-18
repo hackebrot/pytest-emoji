@@ -1,3 +1,3 @@
 # Welcome to pytest-emoji
 
-pytest + emoji
+A pytest plugin that adds emojis to your test result report 😍
