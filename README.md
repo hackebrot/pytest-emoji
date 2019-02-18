@@ -37,7 +37,7 @@ You can install **pytest-emoji** via [pip][pip] from [PyPI][PyPI]:
 $ pip install pytest-emoji
 ```
 
-This will automatically install **pytest** of version 4.2.0 or higher.
+This will automatically install **pytest** of version 4.2.1 or higher.
 
 [pip]: https://pypi.python.org/pypi/pip/
 [PyPI]: https://pypi.org/project/pytest-emoji/
