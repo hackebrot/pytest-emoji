@@ -1,5 +1,5 @@
 site_name: pytest-emoji
-site_description: pytest + emoji
+site_description: A pytest plugin that adds emojis to your test result report
 site_author: Raphael Pierzina
 
 theme: readthedocs
