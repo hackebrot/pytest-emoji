@@ -1,35 +1,31 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
-import os
-
-from setuptools import setup, find_packages
+import pathlib
+import setuptools
 
 
-def read(fname):
-    file_path = os.path.join(os.path.dirname(__file__), fname)
-
-    with open(file_path, encoding="utf-8") as f:
-        contents = f.read()
-
-    return contents
+def read(*args):
+    file_path = pathlib.Path(__file__).parent.joinpath(*args)
+    with file_path.open(encoding="utf-8") as f:
+        return f.read()
 
 
-setup(
+setuptools.setup(
     name="pytest-emoji",
-    version="0.1.0",
+    version="0.2.0",
     author="Raphael Pierzina",
     author_email="raphael@hackebrot.de",
     maintainer="Raphael Pierzina",
     maintainer_email="raphael@hackebrot.de",
     license="MIT",
     url="https://github.com/hackebrot/pytest-emoji",
-    description="pytest + emoji",
-    long_description=read("README.rst"),
-    packages=find_packages("src"),
+    description="A pytest plugin that adds emojis to your test result report",
+    long_description=read("README.md"),
+    long_description_content_type="text/markdown",
+    packages=setuptools.find_packages("src"),
     package_dir={"": "src"},
     include_package_data=True,
-    install_requires=["pytest>=4.2.0"],
+    zip_safe=False,
+    python_requires=">=3.4",
+    install_requires=["pytest>=4.2.1"],
     classifiers=[
         "Development Status :: 4 - Beta",
         "Framework :: Pytest",
@@ -39,6 +35,8 @@ setup(
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.4",
         "Programming Language :: Python :: 3.5",
+        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: Implementation :: CPython",
         "Operating System :: OS Independent",
         "License :: OSI Approved :: MIT License",
