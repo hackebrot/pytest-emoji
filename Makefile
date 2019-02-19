@@ -14,7 +14,7 @@ clean-tox:
 clean-build:
 	rm -rf build/
 	rm -rf dist/
-	rm -rf *.egg-info
+	rm -rf src/*.egg-info
 
 clean-py:
 	find . -type f -name "*.py[co]" -delete
