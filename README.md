@@ -88,27 +88,27 @@ If you wish to use the default, omit the according hook.
 
 ```python
 def pytest_emoji_passed(config):
-    return u"🍪 ", u"PASSED 🍪 "
+    return "🍪 ", "PASSED 🍪 "
 
 
 def pytest_emoji_failed(config):
-    return u"😿 ", u"FAILED 😿 "
+    return "😿 ", "FAILED 😿 "
 
 
 def pytest_emoji_skipped(config):
-    return u"🙈 ", u"SKIPPED 🙈 "
+    return "🙈 ", "SKIPPED 🙈 "
 
 
 def pytest_emoji_error(config):
-    return u"💩 ", u"ERROR 💩 "
+    return "💩 ", "ERROR 💩 "
 
 
 def pytest_emoji_xfailed(config):
-    return u"🤓 ", u"XFAIL 🤓 "
+    return "🤓 ", "XFAIL 🤓 "
 
 
 def pytest_emoji_xpassed(config):
-    return u"😜 ", u"XPASS 😜 "
+    return "😜 ", "XPASS 😜 "
 ```
 
 **Naming the hooks correctly is important, make sure you don't make any typos**
