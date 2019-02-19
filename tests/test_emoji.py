@@ -1,77 +1,3 @@
-import textwrap
-import pytest
-
-
-@pytest.fixture
-def emoji_tests():
-    return textwrap.dedent(
-        """
-        import pytest
-
-        def test_passed():
-            assert True
-
-        def test_failed():
-            assert False
-
-        @pytest.mark.xfail
-        def test_xfailed():
-            assert False
-
-        @pytest.mark.xfail
-        def test_xpassed():
-            assert True
-
-        def test_new_pytest_is_awesome():
-            assert True
-
-        @pytest.mark.skipif(True, reason='nope')
-        def test_skipped():
-            assert True
-
-        @pytest.fixture
-        def lol():
-            raise RuntimeError
-
-        @pytest.mark.raph
-        def test_error(lol):
-            assert True
-
-        """
-    )
-
-
-@pytest.fixture
-def custom_emojis():
-    return textwrap.dedent(
-        """
-        def pytest_emoji_passed(config):
-            return u'🍪 ', u'PASSED 🍪 '
-
-
-        def pytest_emoji_failed(config):
-            return u'😿 ', u'FAILED 😿 '
-
-
-        def pytest_emoji_skipped(config):
-            return u'🙈 ', u'SKIPPED 🙈 '
-
-
-        def pytest_emoji_error(config):
-            return u'💩 ', u'ERROR 💩 '
-
-
-        def pytest_emoji_xfailed(config):
-            return u'🤓 ', u'XFAIL 🤓 '
-
-
-        def pytest_emoji_xpassed(config):
-            return u'😜 ', u'XPASS 😜 '
-
-        """
-    )
-
-
 def test_emoji_disabled_by_default_verbose(testdir, emoji_tests):
     # create a temporary pytest test module
     testdir.makepyfile(emoji_tests)
@@ -86,7 +12,6 @@ def test_emoji_disabled_by_default_verbose(testdir, emoji_tests):
             "*::test_failed FAILED",
             "*::test_xfailed XFAIL",
             "*::test_xpassed XPASS",
-            "*::test_new_pytest_is_awesome PASSED",
             "*::test_skipped SKIPPED",
             "*::test_error ERROR",
         ]
@@ -113,7 +38,6 @@ def test_emoji_enabled_verbose(testdir, emoji_tests):
             "*::test_failed FAILED 😰 ",
             "*::test_xfailed XFAIL 😞 ",
             "*::test_xpassed XPASS 😲 ",
-            "*::test_new_pytest_is_awesome PASSED 😃 ",
             "*::test_skipped SKIPPED 🙄 ",
             "*::test_error ERROR 😡 ",
         ]
@@ -142,7 +66,6 @@ def test_emoji_enabled_custom_verbose(testdir, emoji_tests, custom_emojis):
             "*::test_failed FAILED 😿 ",
             "*::test_xfailed XFAIL 🤓 ",
             "*::test_xpassed XPASS 😜 ",
-            "*::test_new_pytest_is_awesome PASSED 🍪 ",
             "*::test_skipped SKIPPED 🙈 ",
             "*::test_error ERROR 💩 ",
         ]
@@ -161,7 +84,7 @@ def test_emoji_disabled_by_default_non_verbose(testdir, emoji_tests):
     result = testdir.runpytest("-o", "console_output_style=classic")
 
     # fnmatch_lines does an assertion internally
-    result.stdout.fnmatch_lines(["* .FxX.sE"])
+    result.stdout.fnmatch_lines(["* .FxXsE"])
 
     # make sure that that we get a '1' exit code
     # as we have at least one failure
@@ -176,7 +99,7 @@ def test_emoji_enabled_non_verbose(testdir, emoji_tests):
     result = testdir.runpytest("--emoji", "-o", "console_output_style=classic")
 
     # fnmatch_lines does an assertion internally
-    result.stdout.fnmatch_lines(["* 😃 😰 😞 😲 😃 🙄 😡 "])
+    result.stdout.fnmatch_lines(["* 😃 😰 😞 😲 🙄 😡 "])
 
     # make sure that that we get a '1' exit code
     # as we have at least one failure
@@ -193,7 +116,7 @@ def test_emoji_enabled_custom_non_verbose(testdir, emoji_tests, custom_emojis):
     result = testdir.runpytest("--emoji", "-o", "console_output_style=classic")
 
     # fnmatch_lines does an assertion internally
-    result.stdout.fnmatch_lines(["* 🍪 😿 🤓 😜 🍪 🙈 💩 "])
+    result.stdout.fnmatch_lines(["* 🍪 😿 🤓 😜 🙈 💩 "])
 
     # make sure that that we get a '1' exit code
     # as we have at least one failure
