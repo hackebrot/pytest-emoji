@@ -1,7 +1,4 @@
-# -*- coding: utf-8 -*-
-
 import textwrap
-
 import pytest
 
 
@@ -9,8 +6,6 @@ import pytest
 def emoji_tests():
     return textwrap.dedent(
         """
-        # -*- coding: utf-8 -*-
-
         import pytest
 
         def test_passed():
