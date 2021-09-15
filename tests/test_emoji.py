@@ -12,7 +12,7 @@ def test_emoji_disabled_by_default_verbose(testdir, emoji_tests):
             "*::test_failed FAILED",
             "*::test_xfailed XFAIL",
             "*::test_xpassed XPASS",
-            "*::test_skipped SKIPPED",
+            "*::test_skipped SKIPPED *",
             "*::test_error ERROR",
         ]
     )
@@ -38,7 +38,7 @@ def test_emoji_enabled_verbose(testdir, emoji_tests):
             "*::test_failed FAILED 😰 ",
             "*::test_xfailed XFAIL 😞 ",
             "*::test_xpassed XPASS 😲 ",
-            "*::test_skipped SKIPPED 🙄 ",
+            "*::test_skipped SKIPPED 🙄 *",
             "*::test_error ERROR 😡 ",
         ]
     )
@@ -66,7 +66,7 @@ def test_emoji_enabled_custom_verbose(testdir, emoji_tests, custom_emojis):
             "*::test_failed FAILED 😿 ",
             "*::test_xfailed XFAIL 🤓 ",
             "*::test_xpassed XPASS 😜 ",
-            "*::test_skipped SKIPPED 🙈 ",
+            "*::test_skipped SKIPPED 🙈 *",
             "*::test_error ERROR 💩 ",
         ]
     )
